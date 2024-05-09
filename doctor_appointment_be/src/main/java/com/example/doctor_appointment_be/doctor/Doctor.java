@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 
@@ -26,7 +29,7 @@ public class Doctor {
     private String professionalName;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
     @Column(nullable = false)
@@ -37,4 +40,12 @@ public class Doctor {
 
     @Column(nullable = false)
     private LocalTime dayEndTime;
+
+    @Column
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 }
