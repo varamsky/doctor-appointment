@@ -1,5 +1,6 @@
 package com.example.doctor_appointment_be.user;
 
+import com.example.doctor_appointment_be.doctor.Doctor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class User implements Serializable
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID user_id;
+    private UUID userId;
 
     @Column(nullable = false)
     private String name;
@@ -46,12 +47,8 @@ public class User implements Serializable
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-//
-//    @ManyToMany(mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    private List<Group> groups;
-//
-//    @OneToMany(mappedBy = "user")
-//    private List<Template> templates;
+    @OneToOne(mappedBy = "user")
+    private Doctor doctor;
 
 //    @Override
 //    public UUID getJWTIdentifier() {

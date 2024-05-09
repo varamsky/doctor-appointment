@@ -8,8 +8,8 @@ Enable patient to book an appointment with doctors based on their availability.
 
 - Initialize: A direct link to initialize data
 
-  - Doctor Data: Add couple of doctor records. Reference: http://www.doctorsdirectoryindia.com/doctor
-  - Appointment Data: Remove all transational data
+  - Doctor Data: Add a couple of doctor records. Reference: http://www.doctorsdirectoryindia.com/doctor
+  - Appointment Data: Remove all transactional data
 
 - Sign-in (doctor)
 
@@ -29,7 +29,7 @@ Enable patient to book an appointment with doctors based on their availability.
     - Select a doctor from a list of all the doctors
     - Shows available time-slots for selected doctor
     - Patient to select time-slot (see entity / attribute section), enter name, email, phone
-    - Submit to book appintment.
+    - Submit to book appointment.
     - After submission the appointment status will be 'Open'
 
 > You are welcome to choose to use any free HTML/CSS template.
@@ -45,21 +45,23 @@ Enable patient to book an appointment with doctors based on their availability.
   * password
 * doctor
   * doctor_id
-  * doctor_name
-  * user_id
-  * appointment_slot_time (15min, 30min, 45min, 60min, etc)
+  * doctor_name professional(like neurosurgeon, physician, etc...)
+  * user_id(foreign key)
+  * appointment_slot_time (15min, 30min, 45min, 60min, etc) - fix for a doctor
   * day_start_time (9:00am, 10:00am, etc)
   * day_end_time (6:00pm, 7:00pm, etc)
 * appointment
   * appointment_id
   * appointment_date
-  * appointment_time (slot time)
+  * appointment_time - starting time
   * doctor_id
   * patient_name
   * patinet_email
   * patinet_phone
   * appointment_status (Open, Closed, Cancelled)
 
+horizontal axis - date
+vertical axis - time
 
 
 ####Reports
