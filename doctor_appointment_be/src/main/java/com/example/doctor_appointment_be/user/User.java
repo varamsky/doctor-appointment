@@ -51,7 +51,7 @@ public class User implements UserDetails
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Doctor doctor;
 
     @Override
