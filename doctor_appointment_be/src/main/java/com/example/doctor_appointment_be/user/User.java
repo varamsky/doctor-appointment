@@ -1,12 +1,9 @@
 package com.example.doctor_appointment_be.user;
 
 import com.example.doctor_appointment_be.doctor.Doctor;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,10 +16,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 //@EntityListeners(AuditingEntityListener.class)
 public class User implements UserDetails
 //        , JWTSubject
@@ -52,6 +46,8 @@ public class User implements UserDetails
     private LocalDateTime updatedAt;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @JsonIncludeProperties(value = {"doctorId"})
     private Doctor doctor;
 
     @Override

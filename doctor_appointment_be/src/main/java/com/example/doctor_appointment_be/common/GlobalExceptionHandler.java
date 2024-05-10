@@ -1,7 +1,6 @@
 package com.example.doctor_appointment_be.common;
 
 import com.example.doctor_appointment_be.auth.UserAlreadyExistsException;
-import com.example.doctor_appointment_be.user.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,6 +12,8 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    // CUSTOM EXCEPTIONS
+
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleUserAlreadyExistsException(UserAlreadyExistsException exception) {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, exception.getMessage(), "email");
@@ -21,12 +22,14 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception) {
+    public ResponseEntity<Object> handleUserNotFoundException(ResourceNotFoundException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("error", exception.getMessage());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
     }
+
+    // DEFAULT EXCEPTIONS PROVIDED BY SPRING
 
     @ExceptionHandler
     public ResponseEntity<Object> handleInvalidArgument(MethodArgumentNotValidException exception) {
@@ -46,4 +49,6 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
     }
+
+    // TODO: Need to handle HttpMessageNotReadableException when a POST request has no Request Body
 }

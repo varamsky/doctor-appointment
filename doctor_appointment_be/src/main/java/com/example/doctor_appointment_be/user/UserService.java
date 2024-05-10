@@ -1,5 +1,6 @@
 package com.example.doctor_appointment_be.user;
 
+import com.example.doctor_appointment_be.common.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class UserService {
 
     public User getUserById(UUID id) {
         Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) throw new UserNotFoundException("User not found for id - " + id);
+        if (user.isEmpty()) throw new ResourceNotFoundException("User not found for id - " + id);
         else return user.get();
     }
 
