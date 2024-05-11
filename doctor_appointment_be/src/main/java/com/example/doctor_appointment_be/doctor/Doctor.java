@@ -27,7 +27,7 @@ public class Doctor {
 //    @OneToOne(cascade = CascadeType.ALL)
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-    @JsonBackReference
+//    @JsonBackReference // using this doesn't show user_id in the JSON response
     @JsonIncludeProperties(value = {"userId"})
     private User user;
 

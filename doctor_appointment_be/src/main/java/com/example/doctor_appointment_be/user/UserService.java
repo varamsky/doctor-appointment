@@ -11,6 +11,7 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class UserService {
+    // TODO: should this implement an interface?
     private final UserRepository userRepository;
 
     public List<User> getAllUsers() {

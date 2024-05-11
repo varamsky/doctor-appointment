@@ -1,6 +1,8 @@
 package com.example.doctor_appointment_be.common;
 
 import com.example.doctor_appointment_be.auth.UserAlreadyExistsException;
+import com.example.doctor_appointment_be.doctor.DuplicateUserIdForDoctorException;
+import com.example.doctor_appointment_be.doctor.InvalidStartAndEndTimeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -23,6 +25,22 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Object> handleUserNotFoundException(ResourceNotFoundException exception) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("error", exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleDuplicateUserIdForDoctorException(DuplicateUserIdForDoctorException exception) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("user_id", exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleInvalidStartAndEndTimeException(InvalidStartAndEndTimeException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("error", exception.getMessage());
 

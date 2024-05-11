@@ -16,7 +16,7 @@ public class CreateDoctorDTO {
     @JsonProperty(value = "professional_name")
     private String professionalName;
 
-    // TODO: catch exception if provided string is not a valid UUID
+    // TODO: catch exception if provided string is not a valid UUID. This works in places like User Controller getUserById(@PathVariable UUID id) why?
     @NotNull
     @JsonProperty(value = "user_id")
     private UUID userId;
