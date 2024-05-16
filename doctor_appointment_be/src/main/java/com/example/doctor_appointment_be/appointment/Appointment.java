@@ -4,10 +4,7 @@ import com.example.doctor_appointment_be.common.AppointmentStatusEnum;
 import com.example.doctor_appointment_be.doctor.Doctor;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,10 +16,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "appointments")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Appointment {
 
     @Id
