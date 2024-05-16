@@ -2,6 +2,7 @@ package com.example.doctor_appointment_be.appointment;
 
 import com.example.doctor_appointment_be.common.AppointmentStatusEnum;
 import com.example.doctor_appointment_be.doctor.Doctor;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,6 +37,7 @@ public class Appointment {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "doctor_id", nullable = false)
+    @JsonIncludeProperties(value = {"doctorId"})
     private Doctor doctor;
 
     @Column(nullable = false)

@@ -1,5 +1,7 @@
 package com.example.doctor_appointment_be.common;
 
+import com.example.doctor_appointment_be.appointment.AppointmentSlotNotAvailableException;
+import com.example.doctor_appointment_be.appointment.InvalidAppointmentStatusUpdateException;
 import com.example.doctor_appointment_be.auth.UserAlreadyExistsException;
 import com.example.doctor_appointment_be.doctor.DuplicateUserIdForDoctorException;
 import com.example.doctor_appointment_be.doctor.InvalidStartAndEndTimeException;
@@ -41,6 +43,22 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Object> handleInvalidStartAndEndTimeException(InvalidStartAndEndTimeException exception) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("error", exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleCannotCreateAppointmentException(AppointmentSlotNotAvailableException exception) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("error", exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleInvalidAppointmentStatusUpdateException(InvalidAppointmentStatusUpdateException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("error", exception.getMessage());
 

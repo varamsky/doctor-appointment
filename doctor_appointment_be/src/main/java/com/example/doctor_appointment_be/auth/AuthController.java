@@ -32,6 +32,7 @@ public class AuthController {
         LoginResponseDTO loginResponse = new LoginResponseDTO();
         loginResponse.setToken(jwtToken);
         loginResponse.setExpiresIn(jwtService.getExpirationTime());
+        // TODO: no error! only 200 OK with no response when the token is expired
 
         return ResponseEntity.ok(loginResponse);
     }

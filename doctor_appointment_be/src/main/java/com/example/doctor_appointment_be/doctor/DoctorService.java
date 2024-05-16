@@ -3,7 +3,7 @@ package com.example.doctor_appointment_be.doctor;
 import com.example.doctor_appointment_be.user.User;
 import com.example.doctor_appointment_be.common.ResourceNotFoundException;
 import com.example.doctor_appointment_be.user.UserService;
-import com.example.doctor_appointment_be.util.ValidateStartAndEndTimes;
+import com.example.doctor_appointment_be.common.util.TimeUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +54,7 @@ public class DoctorService {
         if (input.getAppointmentSlotTime() != null) doctor.setAppointmentSlotTime(input.getAppointmentSlotTime());
 
         // Validate if the start and end times are valid or not
-        boolean isValid = ValidateStartAndEndTimes.validate(input.getDayStartTime(), input.getDayEndTime(), doctor);
+        boolean isValid = TimeUtility.validateStartAndEndTimes(input.getDayStartTime(), input.getDayEndTime(), doctor);
         if (isValid) {
             if (input.getDayStartTime() != null) doctor.setDayStartTime(input.getDayStartTime());
             if (input.getDayEndTime() != null) doctor.setDayEndTime(input.getDayEndTime());
