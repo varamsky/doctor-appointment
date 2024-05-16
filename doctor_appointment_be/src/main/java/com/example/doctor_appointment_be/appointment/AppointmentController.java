@@ -39,4 +39,9 @@ public class AppointmentController {
     public ResponseEntity<Appointment> updateAppointmentById(@PathVariable UUID id, @RequestBody @Valid UpdateAppointmentDTO input) {
         return ResponseEntity.status(HttpStatus.CREATED).body(appointmentService.updateAppointment(id, input));
     }
+
+    @GetMapping("/get_summary_report")
+    public ResponseEntity<List<GetSummaryReportResponseDTO>> getSummaryReport(@RequestBody @Valid GetSummaryReportRequestDTO input) {
+        return ResponseEntity.ok(appointmentService.getSummaryReport(input));
+    }
 }

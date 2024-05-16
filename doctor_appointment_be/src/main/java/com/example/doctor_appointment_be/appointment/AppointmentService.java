@@ -7,6 +7,8 @@ import com.example.doctor_appointment_be.doctor.DoctorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -65,5 +67,28 @@ public class AppointmentService {
             throw new InvalidAppointmentStatusUpdateException("Open Appointments can only be modified to CLOSED or CANCELLED");
 
         return appointmentRepository.save(appointment);
+    }
+
+    public List<GetSummaryReportResponseDTO> getSummaryReport(GetSummaryReportRequestDTO input) {
+        if (input.getYear() > LocalDate.now().getYear() || (input.getMonth() < 0 || input.getMonth() > 12))
+            throw new InvalidMonthOrYearException("Please provide valid month and year");
+
+//        List<GetSummaryReportResponseDTO> appointments = appointmentRepository.findByAppointmentDateMonth(input.getYear(), input.getMonth());
+        List<GetSummaryReportResponseDTO> appointments = new ArrayList<>();
+
+//        int totalAppointments = 0;
+//        int closedAppointments = 0;
+//        int cancelledAppointments = 0;
+//
+//        for (Appointment appointment : appointments) {
+//            totalAppointments++;
+//            if (appointment.getAppointmentStatus() == AppointmentStatusEnum.CLOSED) {
+//                closedAppointments++;
+//            } else if (appointment.getAppointmentStatus() == AppointmentStatusEnum.CANCELLED) {
+//                cancelledAppointments++;
+//            }
+//        }
+
+        return appointments;
     }
 }
