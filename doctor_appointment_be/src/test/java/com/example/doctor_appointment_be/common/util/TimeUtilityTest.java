@@ -55,8 +55,8 @@ class TimeUtilityTest {
     }
 
     @Test
-    public void testInValidWithStartTime() {
-        LocalTime startTime = LocalTime.of(8, 0);
+    public void testInValidStartTime() {
+        LocalTime startTime = LocalTime.of(19, 0);
         boolean isValid = TimeUtility.validateStartAndEndTimes(startTime, null, doctor);
 
         assertFalse(isValid);

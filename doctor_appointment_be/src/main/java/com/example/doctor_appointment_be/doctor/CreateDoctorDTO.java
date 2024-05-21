@@ -1,5 +1,6 @@
 package com.example.doctor_appointment_be.doctor;
 
+import com.example.doctor_appointment_be.common.DTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -10,7 +11,7 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 @Data
-public class CreateDoctorDTO {
+public class CreateDoctorDTO implements DTO {
     @NotNull
     @Size(min = 5, message = "Professional designation is too short")
     @JsonProperty(value = "professional_name")

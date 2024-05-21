@@ -13,19 +13,21 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class DoctorService {
+public class DoctorService implements IDoctorService {
     // TODO: should this implement an interface?
 
     private final DoctorRepository doctorRepository;
     private final UserService userService;
 
-    public List<Doctor> getAllDoctors() {
+    @Override
+    public List<Doctor> getAll() {
         return doctorRepository.findAll();
     }
 
-    public Doctor createDoctor(CreateDoctorDTO input) {
+    @Override
+    public Doctor save(CreateDoctorDTO input) {
         // TODO: use try catch here?
-        User user = userService.getUserById(input.getUserId());
+        User user = userService.getById(input.getUserId());
 
         // Check if a doctor with this user id is already created
         Optional<Doctor> doctorWithUserId = doctorRepository.findByUserUserId(input.getUserId());
@@ -42,14 +44,16 @@ public class DoctorService {
         return doctorRepository.save(doctor);
     }
 
-    public Doctor getDoctorById(UUID id) {
+    @Override
+    public Doctor getById(UUID id) {
         Optional<Doctor> doctor = doctorRepository.findById(id);
         if (doctor.isEmpty()) throw new ResourceNotFoundException("Doctor not found for id - " + id);
         else return doctor.get();
     }
 
-    public Doctor updateDoctorById(UUID id, UpdateDoctorRequestDTO input) {
-        Doctor doctor = this.getDoctorById(id);
+    @Override
+    public Doctor updateById(UUID id, UpdateDoctorRequestDTO input) {
+        Doctor doctor = this.getById(id);
         if (!input.getProfessionalName().isEmpty()) doctor.setProfessionalName(input.getProfessionalName());
         if (input.getAppointmentSlotTime() != null) doctor.setAppointmentSlotTime(input.getAppointmentSlotTime());
 
@@ -63,9 +67,9 @@ public class DoctorService {
         return doctorRepository.save(doctor);
     }
 
-
-    public void deleteDoctorById(UUID id) {
-        Doctor doctor = this.getDoctorById(id);
+    @Override
+    public void deleteById(UUID id) {
+        Doctor doctor = this.getById(id);
         doctorRepository.deleteById(id);
     }
 

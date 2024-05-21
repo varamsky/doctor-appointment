@@ -30,13 +30,13 @@ public class AppointmentService {
     }
 
     public List<Appointment> getAppointmentsByDoctorAndAppointmentDate(GetAppointmentsByDoctorAndAppointmentDateDTO input) {
-        Doctor doctor = doctorService.getDoctorById(input.getDoctorId());
+        Doctor doctor = doctorService.getById(input.getDoctorId());
 
         return appointmentRepository.getAppointmentsByDoctorAndAppointmentDate(doctor, input.getAppointmentDate());
     }
 
     public Appointment createAppointment(CreateAppointmentDTO input) {
-        Doctor doctor = doctorService.getDoctorById(input.getDoctorId());
+        Doctor doctor = doctorService.getById(input.getDoctorId());
 
         List<Appointment> appointmentsWithSameDoctorAndDate = appointmentRepository.getAppointmentsByDoctorAndAppointmentDate(doctor, input.getAppointmentDate());
 

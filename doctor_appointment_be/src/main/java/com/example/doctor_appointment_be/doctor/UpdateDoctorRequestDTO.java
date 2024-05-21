@@ -1,5 +1,6 @@
 package com.example.doctor_appointment_be.doctor;
 
+import com.example.doctor_appointment_be.common.DTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -10,7 +11,7 @@ import java.time.Duration;
 import java.time.LocalTime;
 
 @Data
-public class UpdateDoctorRequestDTO {
+public class UpdateDoctorRequestDTO implements DTO {
     @Size(min = 2, message = "Professional designation too short, please provide a valid name")
     @JsonProperty("professional_name")
     private String professionalName;

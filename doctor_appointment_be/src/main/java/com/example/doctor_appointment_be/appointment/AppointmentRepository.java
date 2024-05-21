@@ -33,3 +33,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
 //            " GROUP BY a.appointmentDate;")
 //    List<GetSummaryReportResponseDTO> findByAppointmentDateMonth(int year, int month);
 }
+//jdbc template
+
+//native sql -
+//
+//query dsl - complex

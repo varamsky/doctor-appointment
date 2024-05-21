@@ -13,26 +13,26 @@ import java.util.UUID;
 @RequestMapping("/users")
 @AllArgsConstructor
 public class UserController {
-    private final UserService userService;
+    private final IUserService userService;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+        return ResponseEntity.ok(userService.getAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable UUID id) {
-        return ResponseEntity.ok(userService.getUserById(id));
+        return ResponseEntity.ok(userService.getById(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUserById(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDTO updateUserRequestDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.updateUserById(id, updateUserRequestDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.updateById(id, updateUserRequestDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUserById(@PathVariable UUID id) {
-        userService.deleteUserById(id);
+        userService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

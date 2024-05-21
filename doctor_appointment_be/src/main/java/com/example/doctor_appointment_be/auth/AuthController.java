@@ -18,7 +18,7 @@ public class AuthController {
     private final JwtService jwtService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Object> register(@RequestBody @Valid RegisterRequestDTO registerRequestDTO) {
+    public ResponseEntity<Object> signup(@RequestBody @Valid RegisterRequestDTO registerRequestDTO) {
         User registeredUser = authenticationService.signup(registerRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
     }

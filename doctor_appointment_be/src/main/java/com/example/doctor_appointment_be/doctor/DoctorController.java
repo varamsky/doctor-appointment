@@ -14,31 +14,31 @@ import java.util.UUID;
 @AllArgsConstructor
 public class DoctorController {
 
-    private final DoctorService doctorService;
+    private final IDoctorService doctorService;
 
     @GetMapping
     public ResponseEntity<List<Doctor>> getAllDoctors() {
-        return ResponseEntity.ok(doctorService.getAllDoctors());
+        return ResponseEntity.ok(doctorService.getAll());
     }
 
     @PostMapping
     public ResponseEntity<Doctor> createDoctor(@RequestBody @Valid CreateDoctorDTO createDoctorDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.createDoctor(createDoctorDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.save(createDoctorDTO));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Doctor> getDoctorById(@PathVariable UUID id) {
-        return ResponseEntity.ok(doctorService.getDoctorById(id));
+        return ResponseEntity.ok(doctorService.getById(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Doctor> updateDoctorById(@PathVariable UUID id, @RequestBody @Valid UpdateDoctorRequestDTO updateDoctorRequestDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.updateDoctorById(id, updateDoctorRequestDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.updateById(id, updateDoctorRequestDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDoctorById(@PathVariable UUID id) {
-        doctorService.deleteDoctorById(id);
+        doctorService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
