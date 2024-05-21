@@ -14,8 +14,6 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class DoctorService implements IDoctorService {
-    // TODO: should this implement an interface?
-
     private final DoctorRepository doctorRepository;
     private final UserService userService;
 

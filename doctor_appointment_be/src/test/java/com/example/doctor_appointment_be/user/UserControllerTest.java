@@ -57,7 +57,7 @@ class UserControllerTest {
         user2.setName("User 2");
         List<User> users = List.of(user1, user2);
 
-        // TODO: is mocking the userService acceptable? if yes then how will it test for user not found case? Should we find that here or in the Controller tests?
+        // TODO: is mocking the userService acceptable? if yes then how will it test for user not found case? Should we find that here or in the Service tests?
         Mockito.when(userService.getAll()).thenReturn(users);
 
 //        MvcResult mvcResult = mockMvc.perform(get("/users")).andReturn();

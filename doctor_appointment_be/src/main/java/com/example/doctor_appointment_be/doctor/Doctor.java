@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 
-// TODO: do we need @NoArgsConstructor? if we don't use then does it give error
 @Entity
 @Table(name = "doctors")
 @Data
