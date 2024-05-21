@@ -3,6 +3,19 @@ import Sidebar from "./components/Sidebar";
 import DoctorsTable from "./components/DoctorTable.tsx";
 import GlobalStyles from "./styles/GlobalStyles";
 import LoginPage from "./pages/LoginPage.tsx";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  redirect,
+  Navigate,
+} from "react-router-dom";
+import { ROUTES } from "./common/constants.ts";
+import SignupPage from "./pages/SignupPage.tsx";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import DoctorsListPage from "./pages/DoctorsListPage.tsx";
+import AppointmentsListPage from "./pages/AppointmentsListPage.tsx";
 
 // interface Doctor {
 //   id: number;
@@ -26,13 +39,20 @@ const App: React.FC = () => {
 
   return (
     <GlobalStyles>
-      <div>
-        <LoginPage />
-        {/* <Sidebar />
-        <main style={{ flex: 1, padding: "1rem" }}>
-          <DoctorsTable doctors={doctors} />
-        </main> */}
-      </div>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navigate to={ROUTES.LOGIN} />} />
+            <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
+            <Route
+              path={ROUTES.APPOINTMENTS.LIST}
+              element={<AppointmentsListPage />}
+            />
+            <Route path={ROUTES.DOCTORS.LIST} element={<DoctorsListPage />} />
+          </Routes>
+        </BrowserRouter>
+      </LocalizationProvider>
     </GlobalStyles>
   );
 };

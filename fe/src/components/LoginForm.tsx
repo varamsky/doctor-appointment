@@ -8,6 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { ROUTES } from "../common/constants";
+import { Link } from "react-router-dom";
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;
@@ -43,7 +45,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
       <Typography variant="h3">Login</Typography>
       <form onSubmit={handleSubmit}>
         <FormControl fullWidth margin="normal">
-          {/* <InputLabel htmlFor="email">Email</InputLabel> */}
           <TextField
             id="email"
             label="Email"
@@ -54,7 +55,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
           />
         </FormControl>
         <FormControl fullWidth margin="normal">
-          {/* <InputLabel htmlFor="password">Password</InputLabel> */}
           <TextField
             id="password"
             label="Password"
@@ -77,6 +77,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
           Login
         </Button>
       </form>
+      <Typography sx={{ mt: 2 }}>
+        Register as a doctor? <Link to={ROUTES.SIGNUP}>Signup</Link>
+      </Typography>
     </div>
   );
 };

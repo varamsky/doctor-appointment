@@ -2,6 +2,7 @@ import React from "react";
 import LoginForm from "../components/LoginForm.tsx";
 import GlobalStyles from "../styles/GlobalStyles";
 import { login } from "../services/auth/authService.ts";
+import { Typography } from "@mui/material";
 
 const LoginPage: React.FC = () => {
   const handleLogin = async (email: string, password: string) => {
