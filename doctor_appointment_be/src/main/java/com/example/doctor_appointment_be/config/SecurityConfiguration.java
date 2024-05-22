@@ -29,7 +29,7 @@ public class SecurityConfiguration {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests.requestMatchers("/auth/**",
+                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests.requestMatchers("/auth/**","/public/**",
                         // adding swagger-specific endpoints configured to accessible without authentication
                         "/api-docs/**", "/swagger.json", "/swagger-ui/**", "/swagger-resources/**"
                 ).permitAll().anyRequest().authenticated())
