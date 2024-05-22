@@ -61,4 +61,12 @@ class AppointmentUtilityTest {
 
         assertFalse(isValid);
     }
+
+    @Test
+    public void testInValidAppointmentWithStartTimeSameAsExistingStartTime() {
+        LocalTime time = LocalTime.of(12, 0);
+        boolean isValid = AppointmentUtility.validateAppointment(time, appointments, slotTime);
+
+        assertFalse(isValid);
+    }
 }
