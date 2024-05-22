@@ -1,7 +1,10 @@
-import { API_ENDPOINTS } from "../../common/constants";
+import { NavigateFunction } from "react-router-dom";
+import { API_ENDPOINTS, ROUTES } from "../../common/constants";
 import { registerDTO } from "../../common/interfaces";
 import { dayJsToStringTime } from "../../common/utils";
 import axiosInstance from "../axiosInstance";
+
+const jwtLocalStorageKey = import.meta.env.VITE_JWT_LOCAL_STORAGE_KEY;
 
 export const login = async (email: string, password: string) => {
   try {
@@ -11,7 +14,7 @@ export const login = async (email: string, password: string) => {
     });
 
     const { token } = response.data;
-    localStorage.setItem("jwt", token);
+    localStorage.setItem(jwtLocalStorageKey, token);
 
     return response;
   } catch (error) {
@@ -23,8 +26,6 @@ export const signup = async (data: registerDTO) => {
   try {
     const response = await axiosInstance.post(API_ENDPOINTS.SIGNUP, data);
 
-    console.log(`user response = ${JSON.stringify(response)}`);
-    
     if (response.status === 201) {
       let doctorData: any = data;
       doctorData.user_id = response.data.userId;
@@ -36,8 +37,6 @@ export const signup = async (data: registerDTO) => {
         doctorData
       );
 
-    console.log(`doctor response = ${JSON.stringify(createDoctorResponse)}`);
-
       return createDoctorResponse;
     } else return response;
   } catch (error) {
@@ -45,11 +44,7 @@ export const signup = async (data: registerDTO) => {
   }
 };
 
-export const logout = async () => {
-  try {
-    const response = await axiosInstance.post(API_ENDPOINTS.LOGOUT);
-    return response;
-  } catch (error) {
-    throw error;
-  }
+export const logout = async (navigate: NavigateFunction) => {
+  localStorage.removeItem(jwtLocalStorageKey);
+  navigate(ROUTES.AUTH.LOGIN);
 };

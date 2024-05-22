@@ -1,13 +1,10 @@
 import React from "react";
-import Sidebar from "./components/Sidebar";
-import DoctorsTable from "./components/DoctorTable.tsx";
 import GlobalStyles from "./styles/GlobalStyles";
 import LoginPage from "./pages/LoginPage.tsx";
 import {
   BrowserRouter,
   Routes,
   Route,
-  redirect,
   Navigate,
 } from "react-router-dom";
 import { ROUTES } from "./common/constants.ts";
@@ -42,9 +39,9 @@ const App: React.FC = () => {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Navigate to={ROUTES.LOGIN} />} />
-            <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-            <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
+            <Route path="/" element={<Navigate to={ROUTES.AUTH.LOGIN} />} />
+            <Route path={ROUTES.AUTH.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.AUTH.SIGNUP} element={<SignupPage />} />
             <Route
               path={ROUTES.APPOINTMENTS.LIST}
               element={<AppointmentsListPage />}

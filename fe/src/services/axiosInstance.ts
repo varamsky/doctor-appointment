@@ -1,5 +1,6 @@
 import axios from "axios";
 import { setAuthorizationHeader } from "./auth/headerService";
+import { ROUTES } from "../common/constants";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -24,10 +25,12 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (
       error.response.status === 401 &&
-      window.location.pathname !== "/login"
+      window.location.pathname !== ROUTES.AUTH.LOGIN
     ) {
-      localStorage.removeItem("jwt");
-      window.location.href = "/login";
+      const jwtLocalStorageKey = import.meta.env.VITE_JWT_LOCAL_STORAGE_KEY;
+
+      localStorage.removeItem(jwtLocalStorageKey);
+      window.location.href = ROUTES.AUTH.LOGIN;
       const response =
         error.response.data.message ?? "Session expired. Please login again.";
       alert(response);

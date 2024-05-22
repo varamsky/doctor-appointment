@@ -152,7 +152,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
         </Button>
       </form>
       <Typography sx={{ mt: 2 }}>
-        Already a registered doctor? <Link to={ROUTES.LOGIN}>Login</Link>
+        Already a registered doctor? <Link to={ROUTES.AUTH.LOGIN}>Login</Link>
       </Typography>
     </div>
   );

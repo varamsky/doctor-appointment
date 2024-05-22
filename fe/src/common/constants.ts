@@ -10,6 +10,7 @@ export const API_ENDPOINTS = {
     CREATE: "/appointments",
     GET_ALL: "/appointments",
     GET_BY_ID: "/appointments/:id",
+    GET_BY_DOCTOR: "/appointments/by_doctor/doctor_id=?",
   },
   USER: {
     GET_ALL: "/users",
@@ -18,8 +19,10 @@ export const API_ENDPOINTS = {
 };
 
 export const ROUTES = {
-  LOGIN: "/login",
-  SIGNUP: "/signup",
+  AUTH: {
+    LOGIN: "/login",
+    SIGNUP: "/signup",
+  },
   APPOINTMENTS: { LIST: "/appointments" },
   DOCTORS: { LIST: "/doctors" },
 };

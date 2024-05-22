@@ -6,6 +6,8 @@ import dayjs from "dayjs";
 import UserService from "../services/userService.ts";
 import { Typography } from "@mui/material";
 import ResponsiveAppBar from "../components/ResponsiveAppBar.tsx";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../common/constants.ts";
 
 interface DoctorData {
   id: number;
@@ -17,6 +19,9 @@ interface DoctorData {
 }
 
 const DoctorsListPage: React.FC = () => {
+  const navigate = useNavigate();
+  const jwtLocalStorageKey = import.meta.env.VITE_JWT_LOCAL_STORAGE_KEY;
+
   const [rows, setRows] = useState<DoctorData[]>([]);
   // const [doctorsList, setDoctorsList] = useState([]);
   const columns: GridColDef[] = [
@@ -32,6 +37,12 @@ const DoctorsListPage: React.FC = () => {
   ];
 
   React.useEffect(() => {
+    if (localStorage.getItem(jwtLocalStorageKey) === null) {
+      console.log(`jwt key is ${jwtLocalStorageKey}`);
+      console.log(`jwt is ${localStorage.getItem(jwtLocalStorageKey)}`);
+
+      navigate(ROUTES.AUTH.LOGIN);
+    }
     const getDoctors = async () => {
       const doctors = await DoctorService.getAll();
       // console.log(`doctors = ${JSON.stringify(doctors)}`);

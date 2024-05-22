@@ -78,7 +78,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         </Button>
       </form>
       <Typography sx={{ mt: 2 }}>
-        Register as a doctor? <Link to={ROUTES.SIGNUP}>Signup</Link>
+        Register as a doctor? <Link to={ROUTES.AUTH.SIGNUP}>Signup</Link>
       </Typography>
     </div>
   );
