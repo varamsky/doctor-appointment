@@ -26,6 +26,10 @@ const App: React.FC = () => {
                 element={<AppointmentsListPage />}
               />
               <Route path={ROUTES.DOCTORS.LIST} element={<DoctorsListPage />} />
+              <Route
+                path={ROUTES.PUBLIC.DOCTORS_LIST}
+                element={<DoctorsListPage />}
+              />
             </Routes>
           </BrowserRouter>
         </LocalizationProvider>

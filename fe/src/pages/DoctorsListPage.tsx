@@ -8,6 +8,7 @@ import { Typography } from "@mui/material";
 import ResponsiveAppBar from "../components/ResponsiveAppBar.tsx";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../common/constants.ts";
+import PublicService from "../services/publicService.ts";
 
 interface DoctorData {
   id: number;
@@ -20,6 +21,7 @@ interface DoctorData {
 
 const DoctorsListPage: React.FC = () => {
   const navigate = useNavigate();
+  const url = window.location.href;
   const jwtLocalStorageKey = import.meta.env.VITE_JWT_LOCAL_STORAGE_KEY;
 
   const [rows, setRows] = useState<DoctorData[]>([]);
@@ -37,18 +39,21 @@ const DoctorsListPage: React.FC = () => {
   ];
 
   React.useEffect(() => {
-    if (localStorage.getItem(jwtLocalStorageKey) === null) {
-      console.log(`jwt key is ${jwtLocalStorageKey}`);
-      console.log(`jwt is ${localStorage.getItem(jwtLocalStorageKey)}`);
-
+    const isPublic = url.includes("/public");
+    if (!isPublic && localStorage.getItem(jwtLocalStorageKey) === null)
       navigate(ROUTES.AUTH.LOGIN);
-    }
-    const getDoctors = async () => {
-      const doctors = await DoctorService.getAll();
-      // console.log(`doctors = ${JSON.stringify(doctors)}`);
 
-      // let doctorData: DoctorData;
-      // let doctorDataList: DoctorData[];
+    /**
+     * Moving to the public page removes the data from the redux store
+     * So this is a hack to remove the jwt as well to simulate a proper logout
+     * Else, when we move to the authenticated appointment list page it shows an error as doctorId in redux store is null
+     */
+    if (isPublic) localStorage.removeItem(jwtLocalStorageKey);
+
+    const getDoctors = async () => {
+      const doctors = isPublic
+        ? await PublicService.getAllDoctors()
+        : await DoctorService.getAll();
 
       doctors.forEach(async (doctor: any) => {
         // doctorData = doctor;
@@ -57,7 +62,9 @@ const DoctorsListPage: React.FC = () => {
         const minutes = slotTimeDayjs.asMinutes();
         doctor.appointmentSlotTime = minutes;
 
-        const user = await UserService.getById(doctor.user.userId);
+        const user = isPublic
+          ? await PublicService.getUserById(doctor.user.userId)
+          : await UserService.getById(doctor.user.userId);
         doctor.name = user.name;
 
         // doctorDataList.push(doctor);

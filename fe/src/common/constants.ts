@@ -17,6 +17,10 @@ export const API_ENDPOINTS = {
     GET_ALL: "/users",
     GET_BY_ID: "/users/:id",
   },
+  PUBLIC: {
+    GET_ALL_DOCTORS: "/public/doctors",
+    GET_USER_BY_ID: "/public/users/:id",
+  },
 };
 
 export const ROUTES = {
@@ -26,4 +30,5 @@ export const ROUTES = {
   },
   APPOINTMENTS: { LIST: "/appointments" },
   DOCTORS: { LIST: "/doctors" },
+  PUBLIC: { DOCTORS_LIST: "/public/doctors" },
 };
