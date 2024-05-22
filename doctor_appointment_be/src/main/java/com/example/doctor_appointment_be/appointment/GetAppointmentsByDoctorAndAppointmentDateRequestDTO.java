@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
-public class GetAppointmentsByDoctorAndAppointmentDateDTO {
+public class GetAppointmentsByDoctorAndAppointmentDateRequestDTO {
     @NotNull
     @JsonProperty(value = "appointment_date")
     // TODO: pattern="dd/MM/yyyy" is not working

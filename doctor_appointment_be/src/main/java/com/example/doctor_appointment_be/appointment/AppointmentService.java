@@ -29,7 +29,12 @@ public class AppointmentService {
         else return appointment.get();
     }
 
-    public List<Appointment> getAppointmentsByDoctorAndAppointmentDate(GetAppointmentsByDoctorAndAppointmentDateDTO input) {
+    public List<Appointment> getAppointmentsByDoctor(UUID doctorId) {
+        Doctor doctor = doctorService.getById(doctorId);
+        return appointmentRepository.getAppointmentsByDoctor(doctor);
+    }
+
+    public List<Appointment> getAppointmentsByDoctorAndAppointmentDate(GetAppointmentsByDoctorAndAppointmentDateRequestDTO input) {
         Doctor doctor = doctorService.getById(input.getDoctorId());
 
         return appointmentRepository.getAppointmentsByDoctorAndAppointmentDate(doctor, input.getAppointmentDate());

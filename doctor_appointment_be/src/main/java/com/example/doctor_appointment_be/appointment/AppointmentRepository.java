@@ -12,6 +12,7 @@ import java.util.UUID;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, UUID> {
     List<Appointment> getAppointmentsByDoctorAndAppointmentDate(Doctor doctor, LocalDate appointmentDate);
+    List<Appointment> getAppointmentsByDoctor(Doctor doctor);
 
 //    @Query("SELECT\n" +
 //            "appointmentDate as date,\n" +

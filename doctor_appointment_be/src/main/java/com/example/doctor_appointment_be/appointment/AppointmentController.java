@@ -25,8 +25,13 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.getAppointmentById(id));
     }
 
+    @GetMapping("/by_doctor")
+    public ResponseEntity<List<Appointment>> getAppointmentsByDoctorId(@RequestParam(name = "doctor_id") UUID doctorId) {
+        return ResponseEntity.ok(appointmentService.getAppointmentsByDoctor(doctorId));
+    }
+
     @GetMapping("/by_doctor_and_appointment_date")
-    public ResponseEntity<List<Appointment>> getAppointmentsByDoctorAndAppointmentDate(@RequestBody @Valid GetAppointmentsByDoctorAndAppointmentDateDTO input) {
+    public ResponseEntity<List<Appointment>> getAppointmentsByDoctorAndAppointmentDate(@RequestBody @Valid GetAppointmentsByDoctorAndAppointmentDateRequestDTO input) {
         return ResponseEntity.ok(appointmentService.getAppointmentsByDoctorAndAppointmentDate(input));
     }
 
