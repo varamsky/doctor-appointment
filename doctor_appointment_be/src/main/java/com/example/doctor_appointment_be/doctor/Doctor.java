@@ -28,7 +28,7 @@ public class Doctor {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
 //    @JsonBackReference // using this doesn't show user_id in the JSON response
-    @JsonIncludeProperties(value = {"userId"})
+//    @JsonIncludeProperties(value = {"userId"})
     private User user;
 
     @Column(nullable = false)

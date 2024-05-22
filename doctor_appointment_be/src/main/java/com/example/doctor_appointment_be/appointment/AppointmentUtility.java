@@ -8,7 +8,10 @@ public class AppointmentUtility {
     public static boolean validateAppointment(LocalTime appointmentTimeToValidate, List<Appointment> appointments, Duration slotTime) {
         for (Appointment appointment : appointments) {
             LocalTime endTime = appointment.getAppointmentTime().plusMinutes(slotTime.toMinutes());
+
             if (appointmentTimeToValidate.isAfter(appointment.getAppointmentTime()) && appointmentTimeToValidate.isBefore(endTime))
+                return false;
+            if (appointmentTimeToValidate.equals(appointment.getAppointmentTime()))
                 return false;
         }
 
