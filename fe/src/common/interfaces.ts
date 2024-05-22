@@ -10,3 +10,13 @@ export interface registerDTO {
   day_start_time: Dayjs;
   day_end_time: Dayjs;
 }
+
+export interface createAppointmentDTO {
+  appointmentDate: string;
+  appointmentTime: string;
+  doctorId: string;
+  patientName: string;
+  patientEmail: string;
+  patientPhone: string;
+  appointmentStatus: string;
+}

@@ -1,13 +1,15 @@
 export type Doctor = {
-  email: string;
-  name: string;
-  userId: string;
-  username: string;
+  user: {
+    email: string;
+    name: string;
+    username: string;
+    userId: string;
+  };
   doctorId: string;
   professionalName: string;
   appointmentSlotTime: number; // in minutes
   dayStartTime: string;
-  datEndTime: string;
+  dayEndTime: string;
 };
 
 export type ErrorResponse = {

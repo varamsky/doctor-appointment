@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = async (email: string, password: string) => {
     console.log(`Username: ${email}, Password: ${password}`);
-    const response = await login(email, password, navigate, dispatch);
+    await login(email, password, navigate, dispatch);
   };
 
   useEffect(() => {

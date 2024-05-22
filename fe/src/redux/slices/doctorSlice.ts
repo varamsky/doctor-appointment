@@ -12,6 +12,7 @@ const initialState = {
     dayStartTime: null,
     datEndTime: null,
   },
+  doctors: [],
 };
 
 const doctorSlice = createSlice({
@@ -21,9 +22,12 @@ const doctorSlice = createSlice({
     setDoctor(state, action) {
       state.currentDoctor = action.payload;
     },
+    addDoctors(state, action) {
+      state.doctors = action.payload;
+    },
   },
 });
 
-export const { setDoctor } = doctorSlice.actions;
+export const { setDoctor, addDoctors } = doctorSlice.actions;
 
 export default doctorSlice.reducer;

@@ -44,7 +44,7 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseUserMenu = (
-    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    _: React.MouseEvent<HTMLLIElement, MouseEvent>,
     setting: string
   ) => {
     if (setting === "Logout") logout(navigate);

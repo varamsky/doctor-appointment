@@ -20,6 +20,9 @@ export const API_ENDPOINTS = {
   PUBLIC: {
     GET_ALL_DOCTORS: "/public/doctors",
     GET_USER_BY_ID: "/public/users/:id",
+    GET_APPOINTMENTS_BY_DOCTOR_AND_DATE:
+      "/public/appointments/by_doctor_and_appointment_date",
+    CREATE_APPOINTMENT: "/public/appointments",
   },
 };
 
@@ -30,5 +33,5 @@ export const ROUTES = {
   },
   APPOINTMENTS: { LIST: "/appointments" },
   DOCTORS: { LIST: "/doctors" },
-  PUBLIC: { DOCTORS_LIST: "/public/doctors" },
+  PUBLIC: { DOCTORS_LIST: "/public/doctors", DOCTOR: "/public/doctors/:id" },
 };

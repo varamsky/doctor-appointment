@@ -10,6 +10,7 @@ import DoctorsListPage from "./pages/DoctorsListPage.tsx";
 import AppointmentsListPage from "./pages/AppointmentsListPage.tsx";
 import { Provider } from "react-redux";
 import store from "./redux/store.ts";
+import ViewDoctorPage from "./pages/ViewDoctorPage.tsx";
 
 const App: React.FC = () => {
   return (
@@ -29,6 +30,10 @@ const App: React.FC = () => {
               <Route
                 path={ROUTES.PUBLIC.DOCTORS_LIST}
                 element={<DoctorsListPage />}
+              />
+              <Route
+                path={ROUTES.PUBLIC.DOCTOR}
+                element={<ViewDoctorPage />}
               />
             </Routes>
           </BrowserRouter>

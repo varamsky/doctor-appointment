@@ -34,11 +34,13 @@ export const login = async (
         )
       );
       const doctor: Doctor = doctorResponse.data;
-      doctor.userId = response.data.user.userId;
-      doctor.name = response.data.user.name;
-      doctor.email = response.data.user.email;
-      doctor.username = response.data.user.username;
-      doctor.appointmentSlotTime = dayjs.duration(doctorResponse.data.appointmentSlotTime).asMinutes();
+      doctor.user.userId = response.data.user.userId;
+      doctor.user.name = response.data.user.name;
+      doctor.user.email = response.data.user.email;
+      doctor.user.username = response.data.user.username;
+      doctor.appointmentSlotTime = dayjs
+        .duration(doctorResponse.data.appointmentSlotTime)
+        .asMinutes();
 
       dispatch(setDoctor(doctor));
       navigate(ROUTES.APPOINTMENTS.LIST);
