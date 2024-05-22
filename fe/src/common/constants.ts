@@ -5,12 +5,13 @@ export const API_ENDPOINTS = {
   DOCTOR: {
     CREATE: "/doctors",
     GET_ALL: "/doctors",
+    GET_BY_ID: "/doctors/:id",
   },
   APPOINTMENT: {
     CREATE: "/appointments",
     GET_ALL: "/appointments",
     GET_BY_ID: "/appointments/:id",
-    GET_BY_DOCTOR: "/appointments/by_doctor/doctor_id=?",
+    GET_BY_DOCTOR: "/appointments/by_doctor?doctor_id={doctor_id}",
   },
   USER: {
     GET_ALL: "/users",

@@ -6,18 +6,15 @@ import ResponsiveAppBar from "../components/ResponsiveAppBar.tsx";
 import AppointmentService from "../services/appointmentService.ts";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../common/constants.ts";
-
-// interface DoctorData {
-//   id: number;
-//   name: string;
-//   professionalName?: string;
-//   appointmentSlotTime?: number;
-//   dayStartTime?: string;
-//   dayEndTime?: string;
-// }
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store.ts";
 
 const AppointmentsListPage: React.FC = () => {
   const navigate = useNavigate();
+
+  const currentDoctor = useSelector(
+    (state: RootState) => state.doctor.currentDoctor
+  );
 
   const [rows, setRows] = useState([]);
   const columns: GridColDef[] = [
@@ -42,23 +39,12 @@ const AppointmentsListPage: React.FC = () => {
     if (localStorage.getItem(jwtLocalStorageKey) === null)
       navigate(ROUTES.AUTH.LOGIN);
     const getDoctors = async () => {
-      const appointments = await AppointmentService.getAll();
-      // console.log(`appointments = ${JSON.stringify(appointments)}`);
-
-      // let doctorData: DoctorData;
-      // let doctorDataList: DoctorData[];
+      const appointments = await AppointmentService.getByDoctor(
+        currentDoctor.doctorId
+      );
 
       appointments.forEach(async (appointment: any) => {
-        // doctorData = doctor;
         appointment.id = appointment.appointmentId;
-        // const slotTimeDayjs = dayjs.duration(doctor.appointmentSlotTime);
-        // const minutes = slotTimeDayjs.asMinutes();
-        // doctor.appointmentSlotTime = minutes;
-
-        // const user = await UserService.getById(doctor.user.userId);
-        // doctor.name = user.name;
-
-        // doctorDataList.push(doctor);
       });
 
       setRows(appointments);
