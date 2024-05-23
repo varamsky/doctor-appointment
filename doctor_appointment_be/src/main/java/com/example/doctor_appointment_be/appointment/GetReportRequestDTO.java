@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class GetSummaryReportRequestDTO {
+public class GetReportRequestDTO {
     @NotNull
     @Min(value = 1, message = "Please provide a valid month number, minimum is 1")
     @Max(value = 12, message = "Please provide a valid month number, maximum is 12")

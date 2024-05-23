@@ -24,9 +24,20 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
             FROM appointments AS a
                 WHERE YEAR(a.appointment_date) = ?1
                 AND MONTH(a.appointment_date) = ?2
-            GROUP BY a.appointment_date;
+            GROUP BY a.appointment_date
             """, nativeQuery = true)
     List<ISummaryReport> getSummaryReport(int year, int month); // this uses "interface based projection"
+
+    @Query(value = """
+            SELECT
+                appointment_date as appointmentDate,
+                patient_name as patientName,
+                appointment_status as appointmentStatus
+            FROM appointments
+                WHERE YEAR(appointment_date) = ?1
+                AND MONTH(appointment_date) = ?2
+            """, nativeQuery = true)
+    List<IDetailReport> getDetailReport(int year, int month); // this uses "interface based projection"
 }
 
 //jdbc template

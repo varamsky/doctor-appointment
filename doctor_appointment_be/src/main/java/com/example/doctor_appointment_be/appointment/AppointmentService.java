@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -74,10 +73,21 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
-    public List<ISummaryReport> getSummaryReport(GetSummaryReportRequestDTO input) {
+    public List<ISummaryReport> getSummaryReport(GetReportRequestDTO input) {
         if (input.getYear() > LocalDate.now().getYear() || (input.getMonth() < 0 || input.getMonth() > 12))
             throw new InvalidMonthOrYearException("Please provide valid month and year");
 
         return appointmentRepository.getSummaryReport(input.getYear(), input.getMonth());
+    }
+
+    public List<IDetailReport> getDetailReport(GetReportRequestDTO input) {
+        if (input.getYear() > LocalDate.now().getYear() || (input.getMonth() < 0 || input.getMonth() > 12))
+            throw new InvalidMonthOrYearException("Please provide valid month and year");
+
+        List<IDetailReport> result = appointmentRepository.getDetailReport(input.getYear(), input.getMonth());
+
+        System.out.println(result.get(0));
+
+        return result;
     }
 }
