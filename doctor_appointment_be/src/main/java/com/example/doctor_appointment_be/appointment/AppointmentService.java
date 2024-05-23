@@ -78,8 +78,6 @@ public class AppointmentService {
         if (input.getYear() > LocalDate.now().getYear() || (input.getMonth() < 0 || input.getMonth() > 12))
             throw new InvalidMonthOrYearException("Please provide valid month and year");
 
-        List<ISummaryReport> appointments = appointmentRepository.getSummaryReport(input.getYear(), input.getMonth());
-//            List<GetSummaryReportResponseDTO> appointments = appointmentRepository.getSummaryReport(input.getYear(), input.getMonth());
-        return appointments;
+        return appointmentRepository.getSummaryReport(input.getYear(), input.getMonth());
     }
 }
