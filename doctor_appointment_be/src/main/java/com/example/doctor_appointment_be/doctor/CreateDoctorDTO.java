@@ -18,6 +18,8 @@ public class CreateDoctorDTO implements DTO {
     private String professionalName;
 
     // TODO: catch exception if provided string is not a valid UUID. This works in places like User Controller getUserById(@PathVariable UUID id) why?
+    // solution - add filter in security chain
+    // check binding result
     @NotNull
     @JsonProperty(value = "user_id")
     private UUID userId;

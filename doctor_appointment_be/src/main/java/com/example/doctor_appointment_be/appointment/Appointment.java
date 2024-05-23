@@ -43,6 +43,7 @@ public class Appointment {
     private String patientPhone;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private AppointmentStatusEnum appointmentStatus;
 
     @Column

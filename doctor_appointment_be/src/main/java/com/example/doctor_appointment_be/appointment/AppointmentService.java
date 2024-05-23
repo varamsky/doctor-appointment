@@ -45,7 +45,7 @@ public class AppointmentService {
 
         List<Appointment> appointmentsWithSameDoctorAndDate = appointmentRepository.getAppointmentsByDoctorAndAppointmentDate(doctor, input.getAppointmentDate());
 
-        if (!AppointmentUtility.validateAppointment(input.getAppointmentTime(), appointmentsWithSameDoctorAndDate, doctor.getAppointmentSlotTime()))
+        if (!AppointmentUtility.validateAppointment(input.getAppointmentTime(), appointmentsWithSameDoctorAndDate, doctor.getAppointmentSlotTime(), doctor.getDayStartTime(), doctor.getDayEndTime()))
             throw new AppointmentSlotNotAvailableException("Slot not available");
 
         Appointment appointment = new Appointment();
@@ -74,26 +74,12 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
-    public List<GetSummaryReportResponseDTO> getSummaryReport(GetSummaryReportRequestDTO input) {
+    public List<ISummaryReport> getSummaryReport(GetSummaryReportRequestDTO input) {
         if (input.getYear() > LocalDate.now().getYear() || (input.getMonth() < 0 || input.getMonth() > 12))
             throw new InvalidMonthOrYearException("Please provide valid month and year");
 
-//        List<GetSummaryReportResponseDTO> appointments = appointmentRepository.findByAppointmentDateMonth(input.getYear(), input.getMonth());
-        List<GetSummaryReportResponseDTO> appointments = new ArrayList<>();
-
-//        int totalAppointments = 0;
-//        int closedAppointments = 0;
-//        int cancelledAppointments = 0;
-//
-//        for (Appointment appointment : appointments) {
-//            totalAppointments++;
-//            if (appointment.getAppointmentStatus() == AppointmentStatusEnum.CLOSED) {
-//                closedAppointments++;
-//            } else if (appointment.getAppointmentStatus() == AppointmentStatusEnum.CANCELLED) {
-//                cancelledAppointments++;
-//            }
-//        }
-
+        List<ISummaryReport> appointments = appointmentRepository.getSummaryReport(input.getYear(), input.getMonth());
+//            List<GetSummaryReportResponseDTO> appointments = appointmentRepository.getSummaryReport(input.getYear(), input.getMonth());
         return appointments;
     }
 }

@@ -48,24 +48,60 @@ class AppointmentUtilityTest {
 
     @Test
     public void testValidAppointment() {
+        // start time - 13:00
+        // end time - 13:30
         LocalTime time = LocalTime.of(13, 0);
-        boolean isValid = AppointmentUtility.validateAppointment(time, appointments, slotTime);
+        boolean isValid = AppointmentUtility.validateAppointment(time, appointments, slotTime, doctor.getDayStartTime(), doctor.getDayEndTime());
 
         assertTrue(isValid);
     }
 
     @Test
     public void testInValidAppointment() {
+        // start time - 12:20
+        // end time - 13:10
         LocalTime time = LocalTime.of(12, 20);
-        boolean isValid = AppointmentUtility.validateAppointment(time, appointments, slotTime);
+        boolean isValid = AppointmentUtility.validateAppointment(time, appointments, slotTime, doctor.getDayStartTime(), doctor.getDayEndTime());
 
         assertFalse(isValid);
     }
 
     @Test
     public void testInValidAppointmentWithStartTimeSameAsExistingStartTime() {
+        // start time - 12:00
+        // end time - 12:30
         LocalTime time = LocalTime.of(12, 0);
-        boolean isValid = AppointmentUtility.validateAppointment(time, appointments, slotTime);
+        boolean isValid = AppointmentUtility.validateAppointment(time, appointments, slotTime, doctor.getDayStartTime(), doctor.getDayEndTime());
+
+        assertFalse(isValid);
+    }
+
+    @Test
+    public void testInValidAppointmentWithStartTimeBeforeDoctorDayStartTime() {
+        // start time - 08:00
+        // end time - 08:30
+        LocalTime time = LocalTime.of(8, 0);
+        boolean isValid = AppointmentUtility.validateAppointment(time, appointments, slotTime, doctor.getDayStartTime(), doctor.getDayEndTime());
+
+        assertFalse(isValid);
+    }
+
+    @Test
+    public void testInValidAppointmentWithStartTimeAfterDoctorDayEndTime() {
+        // start time - 18:00
+        // end time - 18:30
+        LocalTime time = LocalTime.of(18, 0);
+        boolean isValid = AppointmentUtility.validateAppointment(time, appointments, slotTime, doctor.getDayStartTime(), doctor.getDayEndTime());
+
+        assertFalse(isValid);
+    }
+
+    @Test
+    public void testInValidAppointmentWithEndTimeAfterDoctorDayEndTime() {
+        // start time - 16:45
+        // end time - 17:15
+        LocalTime time = LocalTime.of(16, 45);
+        boolean isValid = AppointmentUtility.validateAppointment(time, appointments, slotTime, doctor.getDayStartTime(), doctor.getDayEndTime());
 
         assertFalse(isValid);
     }

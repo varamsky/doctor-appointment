@@ -46,7 +46,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/get_summary_report")
-    public ResponseEntity<List<GetSummaryReportResponseDTO>> getSummaryReport(@RequestBody @Valid GetSummaryReportRequestDTO input) {
+    public ResponseEntity<List<ISummaryReport>> getSummaryReport(@RequestBody @Valid GetSummaryReportRequestDTO input) {
         return ResponseEntity.ok(appointmentService.getSummaryReport(input));
     }
 }

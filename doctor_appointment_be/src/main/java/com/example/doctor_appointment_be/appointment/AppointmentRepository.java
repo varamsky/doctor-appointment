@@ -12,28 +12,23 @@ import java.util.UUID;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, UUID> {
     List<Appointment> getAppointmentsByDoctorAndAppointmentDate(Doctor doctor, LocalDate appointmentDate);
+
     List<Appointment> getAppointmentsByDoctor(Doctor doctor);
 
-//    @Query("SELECT\n" +
-//            "appointmentDate as date,\n" +
-//            "  COUNT(*) AS numberOfAppointments,\n" +
-//            "  SUM(CASE WHEN a.appointmentStatus = 2 THEN 1 ELSE 0 END) AS numberOfCancelledAppointments,\n" +
-//            "  SUM(CASE WHEN a.appointmentStatus = 1 THEN 1 ELSE 0 END) AS numberOfClosedAppointments\n" +
-//            "FROM Appointment a\n" +
-//            "WHERE YEAR(a.appointmentDate) = ?1\n" +
-//            "  AND MONTH(a.appointmentDate) = ?2\n" +
-//            "GROUP BY a.appointmentDate;")
-//    List<GetSummaryReportResponseDTO> findByAppointmentDateMonth(int year, int month);
-
-
-
-//    @Query("SELECT NEW com.example.doctor_appointment_be.appointment.GetSummaryReportResponseDTO(a.appointmentDate, COUNT(*), SUM(CASE WHEN a.appointmentStatus = 2 THEN 1 ELSE 0 END), SUM(CASE WHEN a.appointmentStatus = 1 THEN 1 ELSE 0 END))" +
-//            " FROM Appointment a" +
-//            " WHERE YEAR(a.appointmentDate) = ?1" +
-//            "  AND MONTH(a.appointmentDate) = ?2" +
-//            " GROUP BY a.appointmentDate;")
-//    List<GetSummaryReportResponseDTO> findByAppointmentDateMonth(int year, int month);
+    @Query(value = """
+            SELECT
+                appointment_date as appointmentDate,
+                COUNT(*) AS numberOfAppointments,
+                SUM(CASE WHEN a.appointment_status = 'CANCELLED' THEN 1 ELSE 0 END) AS numberOfCancelledAppointments,
+                SUM(CASE WHEN a.appointment_status = 'CLOSED' THEN 1 ELSE 0 END) AS numberOfClosedAppointments
+            FROM appointments AS a
+                WHERE YEAR(a.appointment_date) = ?1
+                AND MONTH(a.appointment_date) = ?2
+            GROUP BY a.appointment_date;
+            """, nativeQuery = true)
+    List<ISummaryReport> getSummaryReport(int year, int month); // this uses "interface based projection"
 }
+
 //jdbc template
 
 //native sql -
