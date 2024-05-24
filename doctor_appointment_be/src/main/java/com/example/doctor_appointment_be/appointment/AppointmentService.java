@@ -6,6 +6,7 @@ import com.example.doctor_appointment_be.doctor.Doctor;
 import com.example.doctor_appointment_be.doctor.DoctorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,6 +40,7 @@ public class AppointmentService {
         return appointmentRepository.getAppointmentsByDoctorAndAppointmentDate(doctor, input.getAppointmentDate());
     }
 
+    //    @Transactional
     public Appointment createAppointment(CreateAppointmentDTO input) {
         Doctor doctor = doctorService.getById(input.getDoctorId());
 
@@ -56,7 +58,13 @@ public class AppointmentService {
         appointment.setPatientPhone(input.getPatientPhone());
         appointment.setAppointmentStatus(input.getAppointmentStatus());
 
+        Appointment result = appointmentRepository.save(appointment);
         return appointmentRepository.save(appointment);
+
+//        System.out.println("Ready to throw exception");
+//        throw new ResourceNotFoundException("Testing for rollback");
+
+//        return result;
     }
 
     public Appointment updateAppointment(UUID id, UpdateAppointmentDTO input) {
