@@ -45,7 +45,12 @@ public class User implements UserDetails
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    // we should enable cascade here because without this we won't be able to delete user by id
+    // user_id is a foreign key constraint in doctors table and deleting user by id will not work and lead to exception
+    @OneToOne(mappedBy = "user",
+            fetch = FetchType.LAZY
+//            cascade = CascadeType.ALL
+    )
     @JsonManagedReference
     @JsonIncludeProperties(value = {"doctorId"})
     private Doctor doctor;

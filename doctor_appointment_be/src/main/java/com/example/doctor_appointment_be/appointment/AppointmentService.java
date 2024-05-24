@@ -1,12 +1,12 @@
 package com.example.doctor_appointment_be.appointment;
 
+import com.example.doctor_appointment_be.audit.Auditable;
 import com.example.doctor_appointment_be.common.AppointmentStatusEnum;
 import com.example.doctor_appointment_be.common.ResourceNotFoundException;
 import com.example.doctor_appointment_be.doctor.Doctor;
 import com.example.doctor_appointment_be.doctor.DoctorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -81,6 +81,7 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
+    @Auditable
     public List<ISummaryReport> getSummaryReport(GetReportRequestDTO input) {
         if (input.getYear() > LocalDate.now().getYear() || (input.getMonth() < 0 || input.getMonth() > 12))
             throw new InvalidMonthOrYearException("Please provide valid month and year");
